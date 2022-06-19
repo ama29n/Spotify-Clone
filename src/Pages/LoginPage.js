@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import SpotifyButton from "../Components/SpotifyButton";
+import SpotifyButton from "../Components/SubComponents/SpotifyButton";
 import spotifyLogo from "../Assets/spotifyLogo.png";
 import { loginUrl } from "../spotify";
 

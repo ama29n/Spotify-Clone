@@ -37,10 +37,10 @@ const extractTokenFromUrl = () => {
     return window.location.hash // This will return the string from '#'
     .substring(1)               // This will remove the first character
     .split("&")                 // This will split the string by removing '&' and we will get an array
-    // converting params to object key value pair 
-    .reduce((initial, param) => {
-        var [paramName, paramValue] = param.split("=");
-        return initial[paramName] = decodeURIComponent(paramValue);
+    .reduce((obj, param) => {
+        const [paramName, paramValue] = param.split("=");
+        obj[paramName] = paramValue;
+        return obj;
     }, {});
 };
 

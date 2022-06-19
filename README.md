@@ -1,1 +1,1 @@
-# spotifyClone
+# Spotify Clone
