@@ -4,7 +4,8 @@ import SpotifyContext from "./SpotifyContext";
 const defualtValues = {
   user: null,
   playlists: null,
-  token: null
+  token: null,
+  list: null
 };
 
 const reducerFunction = (state, action) => {
@@ -28,6 +29,12 @@ const reducerFunction = (state, action) => {
       playlists: action.playlists
     };
   }
+  else if(action.identifier === "setList") {
+    return {
+      ...state,
+      list: action.list
+    };
+  }
 };
 
 const ContextProvider = (props) => {
@@ -38,15 +45,19 @@ const ContextProvider = (props) => {
 
   const setToken = (_token) => {
     dispatchFunction({ identifier: "setToken", token: _token })
-  }
+  };
 
   const setUser = (_user) => {
     dispatchFunction({ identifier: "setUser", user: _user })
-  }
+  };
 
   const setPlaylists = (_playlists) => {
     dispatchFunction({ identifier: "setPlaylists", playlists: _playlists })
-  }
+  };
+
+  const setList = (_list) => {
+    dispatchFunction({ identifier: "setList", list: _list });
+  };
 
   const values = {
     token: curValues.token,
@@ -54,7 +65,9 @@ const ContextProvider = (props) => {
     user: curValues.user,
     setUser: setUser,
     playlists: curValues.playlists,
-    setPlaylists: setPlaylists
+    setPlaylists: setPlaylists,
+    list: curValues.list,
+    setList: setList
   };
 
   return (

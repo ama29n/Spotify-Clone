@@ -34,6 +34,10 @@ function App() {
       spotify.getUserPlaylists()
       .then(playlists => values.setPlaylists(playlists))
       .catch(error => console.log(error));
+
+      spotify.getPlaylist("1O3khB19kJyIuODWYsJUFA")
+      .then(list => values.setList(list))
+      .catch(error => console.log(error));
     }
     
   }, [values]);

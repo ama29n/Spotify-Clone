@@ -25,8 +25,7 @@ function Header() {
   };
 
   const values = useContext(SpotifyContext);
-  console.log(values.user);
-
+  
   let userName = "User";
   if(values.user.display_name)
   userName = values.user.display_name;
@@ -38,6 +37,7 @@ function Header() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 10px 10px 10px",
+        mt: "20px"
       }}
     >
       <Box display="flex" gap="1rem">

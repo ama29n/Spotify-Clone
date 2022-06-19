@@ -45,6 +45,7 @@ function MusicOptions() {
           max={5.16}
           step={0.01}
           size="small"
+          disabled
           sx={{
             color: "#1db954",
             "&:hover": {

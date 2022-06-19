@@ -15,7 +15,6 @@ import SpotifyContext from "../Context/SpotifyContext";
 function Sidebar() {
 
   const values = useContext(SpotifyContext);
-  console.log(values.playlists);
   
   return (
     <Box sx={{
