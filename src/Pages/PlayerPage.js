@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 
 import { Box } from "@mui/material";
 
-function PlayerPage({ spotify }) {
+function PlayerPage() {
   return (
     <Box>
         <Box sx={{

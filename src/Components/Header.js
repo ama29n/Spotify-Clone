@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import SpotifyContext from "../Context/SpotifyContext";
 
 import { Box, IconButton, Button, Menu, MenuItem, Avatar } from "@mui/material";
@@ -6,7 +6,9 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import user from "../Assets/user.png";
+import UserImage from "../Assets/User.png";
+
+import axios from "axios";
 
 const darkTheme = createTheme({
   palette: {
@@ -24,11 +26,21 @@ function Header() {
     setAnchorEl(null);
   };
 
-  const values = useContext(SpotifyContext);
+  const { token, setUser, user } = useContext(SpotifyContext);
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await axios.get("https://api.spotify.com/v1/me", {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
+    });
+      setUser(data);
+    };
+    getUser();
+  }, []);
   
-  let userName = "User";
-  if(values.user.display_name)
-  userName = values.user.display_name;
 
   return (
     <Box
@@ -86,8 +98,8 @@ function Header() {
               gap="1rem"
               padding="0px 10px"
             >
-              <Avatar src={values.user.images[0].url} alt={user}/>
-              <Box>{userName}</Box>
+              <Avatar src={user ? user.images[0].url : UserImage} alt={UserImage}/>
+              <Box>{user ? user.display_name : "User"}</Box>
             </Box>
           </Button>
           <Menu

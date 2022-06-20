@@ -5,34 +5,37 @@ const defualtValues = {
   user: null,
   playlists: null,
   token: null,
-  list: null
+  playlistId: "1O3khB19kJyIuODWYsJUFA",
+  list: null,
 };
 
 const reducerFunction = (state, action) => {
-  if(action.identifier === "setToken") {
+  if (action.identifier === "setToken") {
     return {
       token: action.token,
       user: state.user,
-      playlists: state.playlists
+      playlists: state.playlists,
     };
-  }
-  else if(action.identifier === "setUser") {
+  } else if (action.identifier === "setUser") {
     return {
       token: state.token,
       user: action.user,
-      playlists: state.playlists
+      playlists: state.playlists,
     };
-  }
-  else if(action.identifier === "setPlaylists") {
+  } else if (action.identifier === "setPlaylists") {
     return {
       ...state,
-      playlists: action.playlists
+      playlists: action.playlists,
     };
-  }
-  else if(action.identifier === "setList") {
+  } else if (action.identifier === "setPlaylistId") {
     return {
       ...state,
-      list: action.list
+      playlistId: action.playlistId,
+    };
+  } else if (action.identifier === "setList") {
+    return {
+      ...state,
+      list: action.list,
     };
   }
 };
@@ -44,15 +47,19 @@ const ContextProvider = (props) => {
   );
 
   const setToken = (_token) => {
-    dispatchFunction({ identifier: "setToken", token: _token })
+    dispatchFunction({ identifier: "setToken", token: _token });
   };
 
   const setUser = (_user) => {
-    dispatchFunction({ identifier: "setUser", user: _user })
+    dispatchFunction({ identifier: "setUser", user: _user });
   };
 
   const setPlaylists = (_playlists) => {
-    dispatchFunction({ identifier: "setPlaylists", playlists: _playlists })
+    dispatchFunction({ identifier: "setPlaylists", playlists: _playlists });
+  };
+
+  const setPlaylistId = (_listId) => {
+    dispatchFunction({ identifier: "setPlaylistId", playlistId: _listId });
   };
 
   const setList = (_list) => {
@@ -66,8 +73,10 @@ const ContextProvider = (props) => {
     setUser: setUser,
     playlists: curValues.playlists,
     setPlaylists: setPlaylists,
+    playlistId: curValues.playlistId,
+    setPlaylistId: setPlaylistId,
     list: curValues.list,
-    setList: setList
+    setList: setList,
   };
 
   return (
