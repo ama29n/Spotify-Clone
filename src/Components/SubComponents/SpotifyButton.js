@@ -8,9 +8,9 @@ function SpotifyButton(props) {
       style={{
         borderRadius: 50,
         backgroundColor: "#1db954",
-        fontWeight: "bold"
-    }}
-    {...props}
+        fontWeight: "bold",
+      }}
+      {...props}
     >
       {props.children}
     </Button>

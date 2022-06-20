@@ -2,8 +2,8 @@ import Header from "./Header";
 import BodyListItem from "./SubComponents/BodyListItem";
 
 import { Box, Typography, IconButton } from "@mui/material";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
 
 import { useContext, useEffect, useState } from "react";
 import SpotifyContext from "../Context/SpotifyContext";
@@ -13,7 +13,8 @@ import song from "../Assets/song.jpg";
 import axios from "axios";
 
 function Body() {
-  const { playlistId, setList, list, token } = useContext(SpotifyContext);
+  const { playlistId, setList, list, token, playingStatus, setPlayingStatus, audio } =
+    useContext(SpotifyContext);
 
   useEffect(() => {
     const getPlaylist = async () => {
@@ -27,21 +28,34 @@ function Body() {
             },
           }
         );
-        console.log(playlist.data.tracks.items[0].track);
         setList(playlist.data);
       }
     };
     getPlaylist();
   }, [playlistId]);
 
-  const [paused, setPaused] = useState(false);
+  const statusChangeHandler = () => {
+    if(audio === null) {
+      setPlayingStatus(!playingStatus);
+    } else {
+      audio.addEventListener("ended", () => setPlayingStatus(false));
+      if(playingStatus === false) {
+        setPlayingStatus(true);
+        audio.play();
+      } else {
+        setPlayingStatus(false);
+        audio.pause();
+      }
+    }
+  };
 
   return (
     <Box
       sx={{
         flex: "0.88",
         // background: "linear-gradient(#8E7F7F, Black)",
-        background: "linear-gradient(#D3474F, Black)",
+        // background: "linear-gradient(#D3474F, Black)",
+        background: `linear-gradient(#13478C, ${list ? "rgba(16, 16, 16)" : "Black"})`,
         height: "100vh",
         color: "White",
       }}
@@ -56,12 +70,12 @@ function Body() {
           margin: "10px 0 0 60px",
         }}
       >
-        <Box boxShadow="1px 1px 30px Black" width="230px" >
+        <Box boxShadow="1px 1px 30px Black" width="210px">
           <img
             width="100%"
-            src={ list ? list.images[0].url : song }
+            src={list ? list.images[0].url : song}
             alt="aman"
-            style={{ display: "block"}}
+            style={{ display: "block" }}
           />
         </Box>
 
@@ -83,26 +97,26 @@ function Body() {
           sx={{
             margin: "30px 0 0 0",
             width: "100%",
-            background: "rgba(0, 0, 0, 0.4)",
-            backdropFilter: "blur(40px)",
+            background: "	rgb(0, 0, 0, 0.3)",
+            backdropFilter: "blur(20px)",
             padding: "20px 0",
             height: "300px",
-            overflow: "scroll",
+            overflowY: "scroll",
           }}
         >
           <Box padding="20px">
             <IconButton
-              aria-label={paused ? "play" : "pause"}
-              onClick={() => setPaused(!paused)}
+              aria-label={playingStatus ? "play" : "pause"}
+              onClick={statusChangeHandler}
               style={{
                 backgroundColor: "#1db954",
                 color: "Black",
               }}
             >
-              {!paused ? (
-                <PlayArrowIcon style={{fontSize: "40px"}} />
+              {!playingStatus ? (
+                <PlayArrowIcon style={{ fontSize: "40px" }} />
               ) : (
-                <PauseIcon style={{fontSize: "40px"}} />
+                <PauseIcon style={{ fontSize: "40px" }} />
               )}
             </IconButton>
           </Box>

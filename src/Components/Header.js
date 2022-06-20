@@ -26,7 +26,7 @@ function Header() {
     setAnchorEl(null);
   };
 
-  const { token, setUser, user } = useContext(SpotifyContext);
+  const { token, setUser, user, setToken } = useContext(SpotifyContext);
 
   useEffect(() => {
     const getUser = async () => {
@@ -35,12 +35,11 @@ function Header() {
           Authorization: "Bearer " + token,
           "Content-Type": "application/json",
         },
-    });
+      });
       setUser(data);
     };
     getUser();
   }, []);
-  
 
   return (
     <Box
@@ -49,7 +48,7 @@ function Header() {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 10px 10px 10px",
-        mt: "20px"
+        mt: "20px",
       }}
     >
       <Box display="flex" gap="1rem">
@@ -58,8 +57,8 @@ function Header() {
             sx={{
               backgroundColor: "#0A0A0A",
               "&:hover": {
-                backgroundColor: "#282828"
-              }
+                backgroundColor: "#282828",
+              },
             }}
           >
             <KeyboardArrowLeftIcon htmlColor={"#fff"} />
@@ -68,8 +67,8 @@ function Header() {
             sx={{
               backgroundColor: "#0A0A0A",
               "&:hover": {
-                backgroundColor: "#282828"
-              }
+                backgroundColor: "#282828",
+              },
             }}
           >
             <KeyboardArrowRightIcon htmlColor={"#fff"} />
@@ -88,8 +87,8 @@ function Header() {
               textTransform: "none",
               borderRadius: "50px",
               "&:hover": {
-                backgroundColor: "#282828"
-              }
+                backgroundColor: "#282828",
+              },
             }}
           >
             <Box
@@ -98,7 +97,10 @@ function Header() {
               gap="1rem"
               padding="0px 10px"
             >
-              <Avatar src={user ? user.images[0].url : UserImage} alt={UserImage}/>
+              <Avatar
+                src={user ? user.images[0].url : UserImage}
+                alt={UserImage}
+              />
               <Box>{user ? user.display_name : "User"}</Box>
             </Box>
           </Button>
@@ -112,7 +114,14 @@ function Header() {
             }}
           >
             <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem
+              onClick={() => {
+                setUser(null);
+                setToken(null);
+              }}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </ThemeProvider>
       </Box>

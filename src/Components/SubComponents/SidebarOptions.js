@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
 
-function SidebarOptions({ name, icon }) {
+function SidebarOptions({ name, icon, addProps }) {
   return (
     <Box
+      onClick={addProps}
       sx={{
         cursor: "pointer",
         fontSize: "14px",

@@ -15,7 +15,8 @@ import SpotifyContext from "../Context/SpotifyContext";
 import axios from "axios";
 
 function Sidebar() {
-  const { token, setPlaylists, playlists, setPlaylistId } = useContext(SpotifyContext);
+  const { token, setPlaylists, playlists, setPlaylistId, setList } =
+    useContext(SpotifyContext);
 
   useEffect(() => {
     const getPlaylists = async () => {
@@ -33,10 +34,14 @@ function Sidebar() {
     getPlaylists();
   }, []);
 
-  const playlistSelectHandler = e => {
+  const playlistSelectHandler = (e) => {
     setPlaylistId(e.target.id);
-    console.log(e.target.id);
-  }
+  };
+
+  const homeClickHandler = () => {
+    setPlaylistId(null);
+    setList(null);
+  };
 
   return (
     <Box
@@ -54,7 +59,11 @@ function Sidebar() {
       </Box>
 
       <Box margin="25px 0 0 5px">
-        <SidebarOptions name="Home" icon={<MdHomeFilled />} />
+        <SidebarOptions
+          name="Home"
+          addProps={homeClickHandler}
+          icon={<MdHomeFilled />}
+        />
         <SidebarOptions name="Search" icon={<RiSearch2Line />} />
         <SidebarOptions name="Library" icon={<BiLibrary />} />
       </Box>

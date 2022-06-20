@@ -2,7 +2,10 @@ import { Box } from "@mui/material";
 
 function SidebarPlaylists({ name, playlistSelectHandler, id }) {
   return (
-    <Box onClick={playlistSelectHandler} id={id} sx={{
+    <Box
+      onClick={playlistSelectHandler}
+      id={id}
+      sx={{
         cursor: "pointer",
         fontSize: "14px",
         color: "Gray",
@@ -13,12 +16,13 @@ function SidebarPlaylists({ name, playlistSelectHandler, id }) {
         alignItems: "center",
         gap: "1.5rem",
         "&:hover": {
-            color: "White",
-          },
-    }}>
-        { name }
+          color: "White",
+        },
+      }}
+    >
+      {name}
     </Box>
-  )
+  );
 }
 
 export default SidebarPlaylists;

@@ -11,12 +11,18 @@ function FooterSound() {
     setValue(newValue);
   };
   return (
-    <Box sx={{ width: 200 }}>
+    <Box sx={{ width: 250 }}>
       <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
         <VolumeDown />
-        <Slider aria-label="Volume" value={value} onChange={handleChange} valueLabelDisplay="auto" sx={{
-            color: "#1db954"
-        }} />
+        <Slider
+          aria-label="Volume"
+          value={value}
+          onChange={handleChange}
+          valueLabelDisplay="auto"
+          sx={{
+            color: "#1db954",
+          }}
+        />
         <VolumeUp />
       </Stack>
     </Box>

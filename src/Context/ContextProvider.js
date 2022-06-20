@@ -2,25 +2,27 @@ import { useReducer } from "react";
 import SpotifyContext from "./SpotifyContext";
 
 const defualtValues = {
+  // token: "BQC0uBfANXbU-inkF3h13ozYLd8lU_I3cpM1zkQdkwF2QvTprSZTkp3rePw-UMUGKqRA4JErltySEFdP2kcgLAOYKtYZZGldb-1UW8ZopkFfJJ2LdrdRC2s2xEsImzf_y2hfw02HCRrpWr_Aeh9OZ5QQQOBHIf8Jmk9dv1f2ysa4GxyWPdLe-Sj4ffc39H9itisp7-7AmAK88cUqxLg63A",
   user: null,
   playlists: null,
   token: null,
-  playlistId: "1O3khB19kJyIuODWYsJUFA",
+  playlistId: null,
   list: null,
+  playingStatus: false,
+  playingSong: null,
+  audio: null
 };
 
 const reducerFunction = (state, action) => {
   if (action.identifier === "setToken") {
     return {
+      ...state,
       token: action.token,
-      user: state.user,
-      playlists: state.playlists,
     };
   } else if (action.identifier === "setUser") {
     return {
-      token: state.token,
+      ...state,
       user: action.user,
-      playlists: state.playlists,
     };
   } else if (action.identifier === "setPlaylists") {
     return {
@@ -36,6 +38,21 @@ const reducerFunction = (state, action) => {
     return {
       ...state,
       list: action.list,
+    };
+  } else if (action.identifier === "setPlayingStatus") {
+    return {
+      ...state,
+      playingStatus: action.status,
+    };
+  } else if (action.identifier === "setPlayingSong") {
+    return {
+      ...state,
+      playingSong: action.song,
+    };
+  } else if(action.identifier === "setAudio") {
+    return {
+      ...state,
+      audio: action.url !== null ? new Audio(action.url) : null,
     };
   }
 };
@@ -66,17 +83,50 @@ const ContextProvider = (props) => {
     dispatchFunction({ identifier: "setList", list: _list });
   };
 
+  const setPlayingStatus = (_status) => {
+    dispatchFunction({ identifier: "setPlayingStatus", status: _status });
+  };
+
+  const setPlayingSong = (_song) => {
+    dispatchFunction({ identifier: "setPlayingSong", song: _song });
+  };
+
+  const setAudio = (url) => {
+    dispatchFunction({ identifier: "setAudio", url: url })
+  };
+
   const values = {
+    // for token
     token: curValues.token,
     setToken: setToken,
+
+    // for user data
     user: curValues.user,
     setUser: setUser,
+
+    // for playlists
     playlists: curValues.playlists,
     setPlaylists: setPlaylists,
+
+    // for selected playlist id 
     playlistId: curValues.playlistId,
     setPlaylistId: setPlaylistId,
+
+    // for songs list of selected playlist id 
     list: curValues.list,
     setList: setList,
+
+    // playing status of song for play and pause 
+    playingStatus: curValues.playingStatus,
+    setPlayingStatus: setPlayingStatus,
+
+    // song that is selected for playing 
+    playingSong: curValues.playingSong,
+    setPlayingSong: setPlayingSong,
+
+    // song that is playable 
+    audio: curValues.audio,
+    setAudio: setAudio
   };
 
   return (

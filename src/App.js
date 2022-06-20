@@ -15,7 +15,6 @@ function App() {
     const obj = extractTokenFromUrl();
     window.location.hash = "";
     const _token = obj.access_token;
-
     if (_token) {
       // Saving user data in context API
       values.setToken(_token);

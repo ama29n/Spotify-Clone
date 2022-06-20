@@ -14,10 +14,10 @@ function Footer() {
         width: "100%",
         color: "White",
         padding: "10px 30px",
-        borderTop: "1px solid #282828",
+        borderTop: "2px solid #282828",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
       }}
     >
       <FooterMusicProfile />
