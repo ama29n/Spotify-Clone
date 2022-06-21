@@ -67,33 +67,41 @@ function MusicOptions() {
           <SkipNextIcon htmlColor={"#fff"} />
         </IconButton>
       </Box>
-      {audio ? (
-        <Box width="500px" display="flex" gap="0.7rem" alignItems="center">
-          <Box color="Gray" fontSize="12px" fontWeight="bold">
-            0
-          </Box>
-          <Slider
-            aria-label="Default"
-            valueLabelDisplay="off"
-            min={0}
-            max={(+audio.duration / 60).toFixed(2)}
-            step={0.01}
-            size="small"
-            // disabled
-            sx={{
-              color: "Grey",
-              "&:hover": {
+      
+      <Box sx={{
+        width: "500px",
+        '@media(max-width: 1100px)' : {
+          width: '270px'
+        }
+      }}>
+          {/* <Box color="Gray" fontSize="12px" fontWeight="bold">0</Box> */}
+          <Box width="inherit">
+            <Slider
+              aria-label="Default"
+              valueLabelDisplay="off"
+              min={0}
+              max={5.16}
+              step={0.01}
+              size="small"
+              // disabled
+              sx={{
                 color: "#1db954",
-              },
-            }}
-          />
-          <Box color="Gray" fontSize="12px" fontWeight="bold">{`${Math.floor(
-            Number(audio.duration) / 60
-          )} : ${((Number(audio.duration) % 60) / 1000).toFixed(0)}`}</Box>
+                "&:hover": {
+                  color: "#1db954",
+                },
+              }}
+            />
+          </Box>
+          {/* <Box color="Gray" fontSize="12px" fontWeight="bold">a</Box> */}
         </Box>
-      ) : null}
+
     </Box>
   );
 }
 
 export default MusicOptions;
+
+// display="flex" gap="0.7rem" alignItems="center" 
+
+// (+audio.duration / 60).toFixed(2) 
+// {`${Math.floor(Number(audio.duration) / 60)} : ${((Number(audio.duration) % 60) / 1000).toFixed(0)}`}

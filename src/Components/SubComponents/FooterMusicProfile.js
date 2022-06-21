@@ -12,7 +12,9 @@ function FooterMusicProfile() {
         display: "flex",
         alignItems: "center",
         gap: "1rem",
-        // border: "2px solid white"
+        '@media(max-width: 950px)' : {
+          width: '150px'
+        }
       }}
     >
       <Box>
@@ -26,7 +28,7 @@ function FooterMusicProfile() {
 
       <Box>
         <Typography fontSize="14px" fontWeight="bold">
-          {playingSong ? playingSong.name : "No song playing"}
+          {playingSong ? playingSong.name : "Select a song"}
         </Typography>
         <Typography fontSize="12px" color="Gray">
           {playingSong ? playingSong.artists[0].name : null}

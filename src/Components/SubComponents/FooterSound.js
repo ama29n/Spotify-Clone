@@ -11,7 +11,15 @@ function FooterSound() {
     setValue(newValue);
   };
   return (
-    <Box sx={{ width: 250 }}>
+    <Box sx={{
+      width: 250,
+      '@media(max-width: 950px)' : {
+        width: '150px'
+      },
+      '@media(max-width: 720px)' : {
+        display: "none"
+      }
+    }}>
       <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
         <VolumeDown />
         <Slider

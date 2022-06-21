@@ -49,7 +49,12 @@ function BodyListItem({ song }) {
     >
       <Box
         flex="0.50"
-        sx={{ cursor: "pointer", }}
+        sx={{
+          cursor: "pointer",
+          "@media(max-width: 720px)": {
+            flex: "1"
+          }
+        }}
         display="flex"
         gap="0.7rem"
         alignItems="center"
@@ -82,7 +87,11 @@ function BodyListItem({ song }) {
         </Box>
       </Box>
 
-      <Box flex="0.40" id={song.id}>
+      <Box flex="0.40" id={song.id} sx={{
+        "@media(max-width: 720px)": {
+          display: "none"
+        }
+      }}>
         <Typography
           fontSize="15px"
           color="#E0E0E0"
@@ -95,7 +104,11 @@ function BodyListItem({ song }) {
         </Typography>
       </Box>
 
-      <Box flex="0.10" id={song.id}>
+      <Box flex="0.10" id={song.id} sx={{
+        "@media(max-width: 910px)": {
+          display: "none"
+        }
+      }}>
         <Typography
           fontSize="15px"
           color="#E0E0E0"
