@@ -4,7 +4,7 @@ import SpotifyContext from "../../Context/SpotifyContext";
 import axios from "axios";
 
 function BodyListItem({ song }) {
-  const { setPlayingSong, token } = useContext(SpotifyContext);
+  const { setPlayingSong, token, setPlayedPart } = useContext(SpotifyContext);
 
   const minutes = Math.floor(song.duration_ms / 60000);
   const seconds = ((song.duration_ms % 60000) / 1000).toFixed(0);
@@ -24,6 +24,7 @@ function BodyListItem({ song }) {
         },
       }
     );
+    setPlayedPart(0);
     setPlayingSong(song.data);
   };
 
@@ -43,7 +44,7 @@ function BodyListItem({ song }) {
         "&:hover": {
           backgroundColor: "Black",
           borderBottom: "2px solid #282828",
-          borderTop: "2px solid #282828"
+          borderTop: "2px solid #282828",
         },
       }}
     >
@@ -52,8 +53,8 @@ function BodyListItem({ song }) {
         sx={{
           cursor: "pointer",
           "@media(max-width: 720px)": {
-            flex: "1"
-          }
+            flex: "1",
+          },
         }}
         display="flex"
         gap="0.7rem"
@@ -62,18 +63,9 @@ function BodyListItem({ song }) {
         id={song.id}
         onClick={musicSelectHandler}
       >
-        <img
-          width="45px"
-          src={song.album.images[0].url}
-          alt=""
-          id={song.id}
-        />
+        <img width="45px" src={song.album.images[0].url} alt="" id={song.id} />
         <Box>
-          <Typography
-            fontSize="17px"
-            fontWeight="500"
-            id={song.id}
-          >
+          <Typography fontSize="17px" fontWeight="500" id={song.id}>
             {song.name}
           </Typography>
           <Typography
@@ -87,35 +79,43 @@ function BodyListItem({ song }) {
         </Box>
       </Box>
 
-      <Box flex="0.40" id={song.id} sx={{
-        "@media(max-width: 720px)": {
-          display: "none"
-        }
-      }}>
+      <Box
+        flex="0.40"
+        id={song.id}
+        sx={{
+          "@media(max-width: 720px)": {
+            display: "none",
+          },
+        }}
+      >
         <Typography
           fontSize="15px"
           color="#E0E0E0"
           fontWeight="500"
           id={song.id}
           onClick={musicSelectHandler}
-          sx={{ cursor: "pointer", }}
+          sx={{ cursor: "pointer" }}
         >
           {song.album.name}
         </Typography>
       </Box>
 
-      <Box flex="0.10" id={song.id} sx={{
-        "@media(max-width: 910px)": {
-          display: "none"
-        }
-      }}>
+      <Box
+        flex="0.10"
+        id={song.id}
+        sx={{
+          "@media(max-width: 910px)": {
+            display: "none",
+          },
+        }}
+      >
         <Typography
           fontSize="15px"
           color="#E0E0E0"
           fontWeight="500"
           id={song.id}
           onClick={musicSelectHandler}
-          sx={{ cursor: "pointer", }}
+          sx={{ cursor: "pointer" }}
         >
           {time}
         </Typography>

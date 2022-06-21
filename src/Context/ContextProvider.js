@@ -10,7 +10,8 @@ const defualtValues = {
   list: null,
   playingStatus: false,
   playingSong: null,
-  audio: null
+  audio: null,
+  volume: 1,
 };
 
 const reducerFunction = (state, action) => {
@@ -49,10 +50,20 @@ const reducerFunction = (state, action) => {
       ...state,
       playingSong: action.song,
     };
-  } else if(action.identifier === "setAudio") {
+  } else if (action.identifier === "setAudio") {
     return {
       ...state,
       audio: action.url !== null ? new Audio(action.url) : null,
+    };
+  } else if (action.identifier === "setVolume") {
+    return {
+      ...state,
+      volume: action.volume,
+    };
+  } else if (action.identifier === "setPlayedPart") {
+    return {
+      ...state,
+      playedPart: action.part
     };
   }
 };
@@ -92,7 +103,15 @@ const ContextProvider = (props) => {
   };
 
   const setAudio = (url) => {
-    dispatchFunction({ identifier: "setAudio", url: url })
+    dispatchFunction({ identifier: "setAudio", url: url });
+  };
+
+  const setVolume = (volume) => {
+    dispatchFunction({ identifier: "setVolume", volume: volume})
+  };
+
+  const setPlayedPart = (part) => {
+    dispatchFunction({ identifier: "setPlayedPart", part: part});
   };
 
   const values = {
@@ -108,25 +127,33 @@ const ContextProvider = (props) => {
     playlists: curValues.playlists,
     setPlaylists: setPlaylists,
 
-    // for selected playlist id 
+    // for selected playlist id
     playlistId: curValues.playlistId,
     setPlaylistId: setPlaylistId,
 
-    // for songs list of selected playlist id 
+    // for songs list of selected playlist id
     list: curValues.list,
     setList: setList,
 
-    // playing status of song for play and pause 
+    // playing status of song for play and pause
     playingStatus: curValues.playingStatus,
     setPlayingStatus: setPlayingStatus,
 
-    // song that is selected for playing 
+    // song that is selected for playing
     playingSong: curValues.playingSong,
     setPlayingSong: setPlayingSong,
 
-    // song that is playable 
+    // song that is playable
     audio: curValues.audio,
-    setAudio: setAudio
+    setAudio: setAudio,
+
+    // for volume of the song 
+    volume: curValues.volume,
+    setVolume: setVolume,
+
+    // playedPart
+    playedPart: curValues.playedPart,
+    setPlayedPart: setPlayedPart
   };
 
   return (

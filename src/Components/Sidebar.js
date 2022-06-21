@@ -15,8 +15,17 @@ import SpotifyContext from "../Context/SpotifyContext";
 import axios from "axios";
 
 function Sidebar() {
-  const { token, setPlaylists, playlists, setPlaylistId, setList, audio, setAudio, setPlayingStatus, setPlayingSong } =
-    useContext(SpotifyContext);
+  const {
+    token,
+    setPlaylists,
+    playlists,
+    setPlaylistId,
+    setList,
+    audio,
+    setAudio,
+    setPlayingStatus,
+    setPlayingSong,
+  } = useContext(SpotifyContext);
 
   useEffect(() => {
     const getPlaylists = async () => {
@@ -39,7 +48,7 @@ function Sidebar() {
   };
 
   const homeClickHandler = () => {
-    if(audio != null) {
+    if (audio != null) {
       audio.pause();
       setAudio(null);
     }

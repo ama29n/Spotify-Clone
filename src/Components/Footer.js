@@ -18,10 +18,10 @@ function Footer() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        '@media(max-width: 780px)' : {
+        "@media(max-width: 780px)": {
           justifyContent: "flex-start",
-          gap: "4rem"
-        }
+          gap: "4rem",
+        },
       }}
     >
       <FooterMusicProfile />

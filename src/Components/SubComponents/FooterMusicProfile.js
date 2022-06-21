@@ -12,9 +12,9 @@ function FooterMusicProfile() {
         display: "flex",
         alignItems: "center",
         gap: "1rem",
-        '@media(max-width: 950px)' : {
-          width: '150px'
-        }
+        "@media(max-width: 950px)": {
+          width: "150px",
+        },
       }}
     >
       <Box>
