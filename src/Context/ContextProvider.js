@@ -2,10 +2,9 @@ import { useReducer } from "react";
 import SpotifyContext from "./SpotifyContext";
 
 const defualtValues = {
-  token: "BQC0uBfANXbU-inkF3h13ozYLd8lU_I3cpM1zkQdkwF2QvTprSZTkp3rePw-UMUGKqRA4JErltySEFdP2kcgLAOYKtYZZGldb-1UW8ZopkFfJJ2LdrdRC2s2xEsImzf_y2hfw02HCRrpWr_Aeh9OZ5QQQOBHIf8Jmk9dv1f2ysa4GxyWPdLe-Sj4ffc39H9itisp7-7AmAK88cUqxLg63A",
   user: null,
   playlists: null,
-  // token: null,
+  token: null,
   playlistId: null,
   list: null,
   playingStatus: false,
