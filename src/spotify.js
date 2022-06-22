@@ -23,7 +23,7 @@ const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = "6c0d873ec63f41868491e4b5591f4f95";
 
 // Redirect URI 
-const redirectUri = "https://ama29n.github.io/SpotifyClone/";
+const redirectUri = "https://spotify-clone-13b7d.web.app/";
 
 const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}
                             &response_type=token&show_dialog=true`;
