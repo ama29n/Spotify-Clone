@@ -20,7 +20,7 @@ const scopes = [
 const authEndpoint = "https://accounts.spotify.com/authorize";
 
 // CLient Id
-const clientId = "6c0d873ec63f41868491e4b5591f4f95";
+const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 
 // Redirect URI 
 const redirectUri = "https://spotify-clone-13b7d.web.app/";
