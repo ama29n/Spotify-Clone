@@ -23,7 +23,7 @@ const authEndpoint = "https://accounts.spotify.com/authorize";
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
 
 // Redirect URI 
-const redirectUri = "spotify-clone-taupe-delta.vercel.app/";
+const redirectUri = "spotify-clone-ama29n.vercel.app/";
 // const redirectUri = "http://localhost:3000/";
 
 const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}
