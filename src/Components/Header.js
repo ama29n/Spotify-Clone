@@ -6,7 +6,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import UserImage from "../Assets/User.png";
+import UserImage from "../Assets/User.jpg";
 
 import axios from "axios";
 
