@@ -38,7 +38,6 @@ function Sidebar() {
           },
         }
       );
-      console.log(data.items);
       setPlaylists(data.items);
     };
     getPlaylists();

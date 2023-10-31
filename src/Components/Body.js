@@ -5,7 +5,7 @@ import { Box, Typography, IconButton } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import SpotifyContext from "../Context/SpotifyContext";
 
 import song from "../Assets/song.jpg";
@@ -22,7 +22,7 @@ function Body() {
     setPlayingStatus,
     audio,
     volume,
-    setPlayedPart
+    setPlayedPart,
   } = useContext(SpotifyContext);
 
   useEffect(() => {
@@ -48,7 +48,9 @@ function Body() {
       setPlayingStatus(!playingStatus);
     } else {
       audio.addEventListener("ended", () => setPlayingStatus(false));
-      audio.addEventListener("timeupdate", () => setPlayedPart(audio.currentTime));
+      audio.addEventListener("timeupdate", () =>
+        setPlayedPart(audio.currentTime)
+      );
       audio.volume = volume;
       if (playingStatus === false) {
         setPlayingStatus(true);
@@ -60,45 +62,66 @@ function Body() {
     }
   };
 
+  const getColor = () => {
+    let arr = ["#13478c", "#f94449", "#aaff00", "#2aaa8a", "#2aa2aa"];
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  // Styles
+  const __Body_main = {
+    flex: "0.88",
+    background: !list ? `linear-gradient(black, rgba(16, 16, 16))` : `linear-gradient(${getColor()}, rgba(16, 16, 16))`,
+    height: "100vh",
+    color: "White",
+    overflowY: "hidden",
+  };
+
+  const __Body_upperPart = {
+    display: "flex",
+    alignItems: "center",
+    gap: "1.5rem",
+    margin: "10px 60px 0 60px",
+    "@media(max-width: 720px)": {
+      flexDirection: "column",
+      alignItems: "flex-start",
+    },
+  };
+
+  const __Body_upperPart_playlistBox = {
+    boxShadow: "1px 1px 30px Black",
+    width: "210px",
+    "@media(max-width: 720px)": {
+      width: "150px",
+    },
+  };
+
+  const __Body_upperPart_selectASong = {
+    fontSize: "80px",
+    fontWeight: "900",
+    "@media(max-width: 910px)": { fontSize: "55px" },
+    "@media(max-width: 720px)": { fontSize: "35px" },
+  };
+
+  const __Body_lowerPart = {
+    margin: "30px 0 0 0",
+    width: "100%",
+    background: "	rgb(0, 0, 0, 0.3)",
+    backdropFilter: "blur(20px)",
+    padding: "20px 0",
+    height: "500px",
+    overflowY: "scroll",
+  };
+
   return (
-    <Box
-      sx={{
-        flex: "0.88",
-        background: `linear-gradient(#13478C, ${
-          list ? "rgba(16, 16, 16)" : "Black"
-        })`,
-        height: "100vh",
-        color: "White",
-        overflowY: "hidden",
-      }}
-    >
+    <Box sx={__Body_main}>
       <Header />
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: "1.5rem",
-          margin: "10px 60px 0 60px",
-          "@media(max-width: 720px)": {
-            flexDirection: "column",
-            alignItems: "flex-start",
-          },
-        }}
-      >
-        <Box
-          sx={{
-            boxShadow: "1px 1px 30px Black",
-            width: "210px",
-            "@media(max-width: 720px)": {
-              width: "150px",
-            },
-          }}
-        >
+      <Box sx={__Body_upperPart}>
+        <Box sx={__Body_upperPart_playlistBox}>
           <img
             width="100%"
             src={list ? list.images[0].url : song}
-            alt="aman"
+            alt="playlist"
             style={{ display: "block" }}
           />
         </Box>
@@ -107,14 +130,7 @@ function Body() {
           <Typography fontSize="12px" fontWeight="bold">
             {list ? "PLAYLIST" : null}
           </Typography>
-          <Typography
-            sx={{
-              fontSize: "80px",
-              fontWeight: "900",
-              "@media(max-width: 910px)": { fontSize: "55px" },
-              "@media(max-width: 720px)": { fontSize: "35px" },
-            }}
-          >
+          <Typography sx={__Body_upperPart_selectASong}>
             {list ? list.name : "Select a playlist"}
           </Typography>
           <Typography fontSize="14px" fontWeight="bold">
@@ -124,17 +140,7 @@ function Body() {
       </Box>
 
       {list ? (
-        <Box
-          sx={{
-            margin: "30px 0 0 0",
-            width: "100%",
-            background: "	rgb(0, 0, 0, 0.3)",
-            backdropFilter: "blur(20px)",
-            padding: "20px 0",
-            height: "500px",
-            overflowY: "scroll",
-          }}
-        >
+        <Box sx={__Body_lowerPart}>
           <Box padding="20px">
             <IconButton
               aria-label={playingStatus ? "play" : "pause"}

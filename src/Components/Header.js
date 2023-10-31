@@ -55,7 +55,7 @@ function Header() {
         <ThemeProvider theme={darkTheme}>
           <IconButton
             sx={{
-              backgroundColor: "#0A0A0A",
+              backgroundColor: "#181818",
               "&:hover": {
                 backgroundColor: "#282828",
               },
@@ -65,7 +65,7 @@ function Header() {
           </IconButton>
           <IconButton
             sx={{
-              backgroundColor: "#0A0A0A",
+              backgroundColor: "#181818",
               "&:hover": {
                 backgroundColor: "#282828",
               },
@@ -82,7 +82,7 @@ function Header() {
             id="basic-button"
             onClick={handleClick}
             sx={{
-              backgroundColor: "#0A0A0A",
+              backgroundColor: "#181818",
               color: "White",
               textTransform: "none",
               borderRadius: "50px",
@@ -95,10 +95,10 @@ function Header() {
               display="flex"
               alignItems="center"
               gap="1rem"
-              padding="0px 10px"
+              padding="0px 1rem 0px 1px"
             >
               <Avatar
-                src={user ? user.images[0].url : UserImage}
+                src={user?.images[0]?.url ? user.images[0].url : UserImage}
                 alt={UserImage}
               />
               <Box>{user ? user.display_name : "User"}</Box>
