@@ -16,13 +16,16 @@ function LoginPage() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         padding: "4rem 0 8rem",
       }}
     >
-      <img width="40%" src={spotifyLogo} alt="logo" />
+      <h1 style={{
+        color: "White",
+        fontSize: "6rem"
+      }}>SPOKIFY</h1>
       <SpotifyButton onClick={clickHandler} component="a">
-        LOGIN TO SPOTIFY
+        LOGIN TO SPOKIFY
       </SpotifyButton>
     </Box>
   );
