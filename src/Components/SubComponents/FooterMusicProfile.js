@@ -21,17 +21,19 @@ function FooterMusicProfile() {
         <img
           width="50px"
           height="auto"
-          src={playingSong ? playingSong.album.images[0].url : SongImage}
+          src={
+            playingSong?.customCover ? playingSong.customCover : SongImage
+          }
           alt={SongImage}
         />
       </Box>
 
       <Box>
         <Typography fontSize="14px" fontWeight="bold">
-          {playingSong ? playingSong.name : "Select a song"}
+          {playingSong?.customName ? playingSong.customName : "Select a song"}
         </Typography>
         <Typography fontSize="12px" color="Gray">
-          {playingSong ? playingSong.artists[0].name : null}
+          {playingSong?.customArtist ? playingSong.customArtist : null}
         </Typography>
       </Box>
     </Box>

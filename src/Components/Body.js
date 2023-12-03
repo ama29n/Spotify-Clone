@@ -64,7 +64,8 @@ function Body() {
 
   const getColor = () => {
     let arr = ["#13478c", "#f94449", "#aaff00", "#2aaa8a", "#2aa2aa"];
-    return arr[Math.floor(Math.random() * arr.length)];
+    // return arr[Math.floor(Math.random() * arr.length)];
+    return arr[3];
   }
 
   // Styles

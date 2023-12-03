@@ -25,7 +25,14 @@ function BodyListItem({ song }) {
       }
     );
     setPlayedPart(0);
-    setPlayingSong(song.data);
+    const obj = {
+      customName: song.data.name,
+      customAlbum: song.data.album.name,
+      customArtist: song.data.artists[0].name,
+      preview_url: song.data.preview_url,
+      customCover: song.data.album.images[0].url
+  };
+    setPlayingSong(obj);
   };
 
   return (
@@ -41,6 +48,8 @@ function BodyListItem({ song }) {
         padding: "10px 20px",
         borderBottom: "2px solid transparent",
         borderTop: "2px solid transparent",
+        cursor: "pointer",
+        transition: "150ms background-color ease-in, 150ms border-bottom ease-in, 150ms border-top ease-in",
         "&:hover": {
           backgroundColor: "Black",
           borderBottom: "2px solid #282828",
