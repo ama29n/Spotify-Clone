@@ -1,10 +1,17 @@
 import { useState, useContext, useEffect } from "react";
 import SpotifyContext from "../Context/SpotifyContext";
 
-import { Box, IconButton, Button, Menu, MenuItem, Avatar } from "@mui/material";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import {
+  Box,
+  IconButton,
+  Button,
+  Menu,
+  MenuItem,
+  Avatar,
+  Tooltip,
+} from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import LyricsIcon from "@mui/icons-material/Lyrics";
 
 import UserImage from "../Assets/User.jpg";
 
@@ -26,7 +33,8 @@ function Header() {
     setAnchorEl(null);
   };
 
-  const { token, setUser, user, setToken } = useContext(SpotifyContext);
+  const { token, setUser, user, setToken, playingSong } =
+    useContext(SpotifyContext);
 
   useEffect(() => {
     const getUser = async () => {
@@ -41,6 +49,34 @@ function Header() {
     getUser();
   }, []);
 
+  const lyricsHandler = async () => {
+    if (!playingSong) return;
+    const axios = require("axios");
+
+    const options = {
+      method: "GET",
+      url: "https://genius-song-lyrics1.p.rapidapi.com/search/",
+      params: {
+        q: playingSong.customName,
+        per_page: "10",
+        page: "1",
+      },
+      headers: {
+        "X-RapidAPI-Key": "1c434e7680mshfad14dbc09c5168p129f36jsn7c75b0cd65d2",
+        "X-RapidAPI-Host": "genius-song-lyrics1.p.rapidapi.com",
+      },
+    };
+
+    try {
+      console.log(playingSong);
+      const response = await axios.request(options);
+      // console.log(response.data.hits[0].result.url);
+      window.open(response.data.hits[0].result.url, "_black", "width=700,height=580,top=78,left=1000,menubar=no");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -51,30 +87,25 @@ function Header() {
         mt: "20px",
       }}
     >
-      <Box display="flex" gap="1rem">
-        <ThemeProvider theme={darkTheme}>
-          <IconButton
-            sx={{
-              backgroundColor: "#181818",
-              "&:hover": {
-                backgroundColor: "#282828",
-              },
-            }}
-          >
-            <KeyboardArrowLeftIcon htmlColor={"#fff"} />
-          </IconButton>
-          <IconButton
-            sx={{
-              backgroundColor: "#181818",
-              "&:hover": {
-                backgroundColor: "#282828",
-              },
-            }}
-          >
-            <KeyboardArrowRightIcon htmlColor={"#fff"} />
-          </IconButton>
-        </ThemeProvider>
-      </Box>
+      {true && (
+        <Box display="flex" gap="1rem">
+          <ThemeProvider theme={darkTheme}>
+            <Tooltip title="Lyrics">
+              <IconButton
+                sx={{
+                  backgroundColor: "#181818",
+                  "&:hover": {
+                    backgroundColor: "#282828",
+                  },
+                }}
+                onClick={lyricsHandler}
+              >
+                <LyricsIcon htmlColor={"#fff"} />
+              </IconButton>
+            </Tooltip>
+          </ThemeProvider>
+        </Box>
+      )}
 
       <Box>
         <ThemeProvider theme={darkTheme}>
@@ -113,7 +144,7 @@ function Header() {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={() => {window.open(user.external_urls.spotify)}}>Profile</MenuItem>
             <MenuItem
               onClick={() => {
                 setUser(null);

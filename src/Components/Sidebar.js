@@ -3,11 +3,12 @@ import spotifyLogo from "../Assets/spotifyLogo.png";
 
 import SidebarOptions from "./SubComponents/SidebarOptions";
 import { MdHomeFilled } from "react-icons/md";
-import { RiSearch2Line } from "react-icons/ri";
 import { BiLibrary } from "react-icons/bi";
 
 import SidebarPlaylists from "./SubComponents/SidebarPlaylists";
 // import plus from "../Assets/plus.jpg";
+
+import SidebarSearch from "./SubComponents/SidebarSearch";
 
 import { useContext, useEffect } from "react";
 import SpotifyContext from "../Context/SpotifyContext";
@@ -25,6 +26,7 @@ function Sidebar() {
     setAudio,
     setPlayingStatus,
     setPlayingSong,
+    setPlayedPart
   } = useContext(SpotifyContext);
 
   useEffect(() => {
@@ -55,6 +57,7 @@ function Sidebar() {
     setPlayingSong(null);
     setPlayingStatus(false);
     setPlaylistId(null);
+    setPlayedPart(0);
     setList(null);
   };
 
@@ -69,8 +72,11 @@ function Sidebar() {
         padding: "20px",
       }}
     >
-      <Box width="130px" margin="5px 0 0 5px">
-        <img width="100%" src={spotifyLogo} alt="logo" />
+      <Box width="130px" margin="5px 0 0 5px" sx={{
+        fontFamily: "Signika"
+      }}>
+        {/* <img width="100%" src={spotifyLogo} alt="logo" />  */}
+        <h1>SPOKIFY</h1>
       </Box>
 
       <Box margin="25px 0 0 5px">
@@ -79,7 +85,7 @@ function Sidebar() {
           addProps={homeClickHandler}
           icon={<MdHomeFilled />}
         />
-        <SidebarOptions name="Search" icon={<RiSearch2Line />} />
+        <SidebarSearch />
         <SidebarOptions name="Library" icon={<BiLibrary />} />
       </Box>
 

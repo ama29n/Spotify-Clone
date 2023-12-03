@@ -4,7 +4,7 @@ import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import SpotifyContext from "../../Context/SpotifyContext";
 
 function MusicOptions() {
@@ -14,14 +14,14 @@ function MusicOptions() {
 
   useEffect(() => {
     setPlayedPart(0);
-    if (playingSong && playingSong.preview_url !== null) {
+    if (playingSong && playingSong?.preview_url !== null) {
       if (audio != null) {
         audio.pause();
         setAudio(null);
       }
       setPlayingStatus(false);
-      setAudio(playingSong.preview_url);
-    } else if (playingSong && playingSong.preview_url == null) {
+      setAudio(playingSong?.preview_url);
+    } else if (playingSong && playingSong?.preview_url == null) {
       if (audio != null) {
         audio.pause();
         setAudio(null);
